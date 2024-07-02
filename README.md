@@ -164,6 +164,42 @@ Everything updated in my GitHub repository.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/005a2531-1eac-4bca-b5f8-7b9d660b66a4)
 
+If i run the updated pipeline, then we can see the pipeline stages.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/9be679a1-a565-4b53-82fb-38083025e48d)
+
+Awesome! my pipeline is successfully completed.
+
+The artifacts was published after pipeline has been completed.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/d13b7ce5-2ebf-47f1-825d-519392f1f42f)
+
+If you click on the published artifacts, then it will land to the below page.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/4a287ff7-df32-4ef8-94bc-9e5bbbf61a4c)
+
+**Apply Continuous Integration to the Build pipeline for every commit**
+
+I was surprised when I see my pipelines, I triggered manually very first time that is not published anything. The last one pipeline are triggered manually that contains copy files and publish artifacts to pipelines.
+
+Then what is the middle one that I didnt trigger manually. It has been started automatically.
+
+**How it was happened?**
+Yes, I have commit the code to the master branch. The yaml file contains below things.
+
+```
+trigger:
+- master
+```
+
+**What does it mean?**
+
+When you commit the code to the master branch then Azure pipeline will trigger and upload the artifatcs to the pipelines.
+
+This pipeline is triggered by my source code repository, not manually.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/95707f3d-5d7c-42de-91d5-d56279f225ac)
+
 **Release Pipeline**
 
 This Pipeline are generally used to deploy the build artifacts into the agent machines or target servers.
