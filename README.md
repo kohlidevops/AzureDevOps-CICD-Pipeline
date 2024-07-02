@@ -82,6 +82,88 @@ Below logs are sample log which shows how its assembling, processing and buildin
 2024-07-02T03:16:28.0778220Z [INFO] ------------------------------------------------------------------------
 ````
 
+**Copying Build Artifacts from the Project to Azure staging directory**
+
+In an Azure DevOps pipeline, the artifacts should copied from the source directory (/1/s) to the artifact staging directory (/1/a). Then, the artifacts from the artifact staging directory are published to the pipeline.
+
+For this, We have to go to our pipelines and edit the pipeline and we have to perform two tasks - one is copy the artifatcs from source directory to artifact staging directory and next task is from artifact staging directory we need to publich the artifacts to pipelines.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/4af072d5-1ace-4746-a24b-61138ae8a06f)
+
+First Task - Copy the artifacts from  source to artifact directory.
+
+We have to choose the "Copy files" from tasks - you can get the assistance from the right side and your cursor should be in last line of the yaml file.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/8bb71f70-717d-49ee-83ef-5fac37d72f89)
+
+```
+contents - **/*.war
+Target - $(build.artifactstagingdirectory)
+```
+
+You can get the Target folder variable from the help button
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fc3157a3-97f1-4060-bfa4-2f924bb94c1a)
+
+Second Task - Publish build Artifacts from Tasks
+
+```
+Path to publish - $(build.artifactstagingdirectory)  //where we need to get the artifacts
+Artifact name - warfile  //can be meaningful name
+Artifact publish location - Azure Pipelines
+Max Artifact Size - 0  //Put 0 if you don't want to set any limit
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/42c96d0a-0a76-40e5-9058-fb0f9be0a05f)
+
+Cursor would be in the last line - Then Add.
+
+Finally my yaml files looks below
+
+```
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'warfile'
+    publishLocation: 'Container'
+```
+
+This Yaml file will start the build and package the war file, then copy the war file from source directory to artifact staging directory. From there this yaml file will publish the artifacts to Azure Pipelines.
+
+Then validate and save this yaml - It will automatically update into the repository.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/60316df0-a714-4f1d-a999-7d4e6be5048d)
+
+Everything updated in my GitHub repository.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/005a2531-1eac-4bca-b5f8-7b9d660b66a4)
+
 **Release Pipeline**
 
 This Pipeline are generally used to deploy the build artifacts into the agent machines or target servers.
