@@ -345,6 +345,5 @@ Build Pipeline has been completed and my Release-2 has been started.
 
 Yup! My updated source code has been deployed on the target machine.
 
-![Uploading image.png…]()
-
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/0855fd66-519d-426f-bd96-bd19cd6c1bbd)
 
