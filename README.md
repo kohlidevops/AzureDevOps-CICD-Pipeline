@@ -297,3 +297,30 @@ Finally save this project from accidental deletion.
 
 This Pipeline helps us to build end to end Pipeline (connecting Build and Release Pipelines) for CICD implementation.
 
+To start a Create Release
+
+Once we create a Release Pipeline and add the Artifact stages then we can start the Create Release Pipeline.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/57e5f785-9f43-46fc-988c-69dd822b11dc)
+
+Then Create a new Release and Create it. If you click a your release then you can see the running pipeline.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/a20f9679-f0ad-4cb6-b4ee-d338679c6aa0)
+
+If you click on the logs, then we can see successfully deployed artifatcs to our Azure Web App.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/73fd7e14-d528-49e0-8b68-8d7ca84ce1f0)
+
+Everything completed as per below image shown.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/bb707d99-8964-44c6-b4bf-d08d57fa204f)
+
+Now I can access the Java App using below Web App URL
+
+```
+https://latchudevopsdemo.azurewebsites.net/webapp/
+```
+
+![Uploading image.png…]()
+
+Its deployed successfully!
