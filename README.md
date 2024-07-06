@@ -439,6 +439,9 @@ Everything working fine - Arifacts deployed on the QA Evironment, then Regressio
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/20cd5a35-f58b-468e-937c-ee2f6ba30cd3)
 
+Perfect! Regression Test has been completed.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/a2b3da9d-d73c-488c-afc4-27371174bafe)
 
 
 
