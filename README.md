@@ -321,6 +321,30 @@ Now I can access the Java App using below Web App URL
 https://latchudevopsdemo.azurewebsites.net/webapp/
 ```
 
-![Uploading image.png…]()
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/1dcdb917-8d6e-42ad-9957-4ab596bc09bd)
 
 Its deployed successfully!
+
+**How to achieve Continuous Deployment?**
+
+**For CI** - When we make changes to the source code repository, then Build Pipeline will automatically trigger and creates a new artifacts that is war file.
+
+**For CD** - When a new artifacts are created then we have to trigger a Release Pipeline. To achieve this, we can simply enable the Continuous Deployment in the Pipeline as per below image - Its very simple.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/5281d630-e1e0-4705-b7a8-d44556239514)
+
+Go to your Pipeline and edit and enable the Continuous Deployment. Thats it.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fa6635a4-3d92-47f8-aa5c-eaf6a3cba3d7)
+
+Now do some changes in the source code repository and lets check how build and release piplines are working together and how artifacts automatically deployed on to the Azure Web App Service.
+
+Build Pipeline has been completed and my Release-2 has been started.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/b1a50745-539a-4a6e-ad80-75ece0ac95c1)
+
+Yup! My updated source code has been deployed on the target machine.
+
+![Uploading image.png…]()
+
+
