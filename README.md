@@ -206,7 +206,7 @@ After build the Artifacts using Build Pipeline, then we have to create a Release
 
 This Pipeline are generally used to deploy the build artifacts into the agent machines or target servers.
 
-To create a Release Pipeline
+**To create a Release Pipeline**
 
 Navigate to Azure devops, then choose - Releases - Create a new Pipeline
 
@@ -220,7 +220,7 @@ Let me call this stage as QA Environment and save it.
 
 As of now I didn't add anything.
 
-To create a Azure Web App
+**To create a Azure Web App**
 
 Login to portal.azure.com - then create a new service - Choose Azure Web App
 
@@ -247,7 +247,7 @@ After deployment you can access the default Web App page with the help of URL gi
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/42e9c15b-bbc3-480b-acee-e2bbc2be3de0)
 
-To deploy the Artifacts to Web App
+**To deploy the Artifacts to Web App**
 
 Go back to Release pipeline - Select your QA Environment and Add the task.
 
@@ -276,7 +276,7 @@ We can add the deployment stage as Deploy QA. Then where is the Artifacts stage.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/57404c66-edba-42c9-9713-117446dc5a8c)
 
-To add the Artifact stage
+**To add the Artifact stage**
 
 ```
 Project - mydevops
