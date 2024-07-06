@@ -200,9 +200,98 @@ This pipeline is triggered by my source code repository, not manually.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/95707f3d-5d7c-42de-91d5-d56279f225ac)
 
+After build the Artifacts using Build Pipeline, then we have to create a Release a Pipeline to deploy the Artifacts to the agent or target machine.
+
 **Release Pipeline**
 
 This Pipeline are generally used to deploy the build artifacts into the agent machines or target servers.
+
+To create a Release Pipeline
+
+Navigate to Azure devops, then choose - Releases - Create a new Pipeline
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/61503dd8-6a83-4b52-bea5-ad3c0d1f1b0d)
+
+Select - Azure App Service deployment - Which is used to deploy your Artifacts to Azure App Service.
+
+Let me call this stage as QA Environment and save it.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fbc3342f-b842-4817-a83d-b09837910c65)
+
+As of now I didn't add anything.
+
+To create a Azure Web App
+
+Login to portal.azure.com - then create a new service - Choose Azure Web App
+
+```
+subscription - Free Trail
+Resource Group - Mydemo
+Instance name - latchudevopsdemo  //name should be unique
+Publish -  Code
+Runtime stack - Java 8
+Java web server stack - Apache Tomcat 9.0
+Operating System - Linux
+Region - Central US
+Pricing plan - As per your requirement
+Then Review and Create // Rest of things let it to be as default
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fa63eba2-f84f-4d03-94b0-eedfcd919582)
+
+This Web App Service deployment has been completed. (Web App will not create when you are in free trail)
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/9ff274cd-a1f6-42d3-bbd9-87a479e7546a)
+
+After deployment you can access the default Web App page with the help of URL given by Azure.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/42e9c15b-bbc3-480b-acee-e2bbc2be3de0)
+
+To deploy the Artifacts to Web App
+
+Go back to Release pipeline - Select your QA Environment and Add the task.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/d5797258-ed3c-43f6-8831-ad7918028333)
+
+```
+Stage name - QA Environment
+Azure subscription - Select your subscription - Authorize it.
+App type - Web App on Linux
+App service name - latchudevopsdemo  //as you defined while creating Web App
+Save it
+```
+
+Again Select your Agent what we created just now.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/a0019437-4bc3-4b80-b3f4-5acaa4934d16)
+
+```
+Package or folder -  $(System.DefaultWorkingDirectory)/**/*.war
+// DefaultWorkingDirectory is a Pipeline working directory
+// From this working directory we can get the war file which was published in Build Pipeline stage
+Change the pipeline as Deploy QA - Then Save it
+```
+
+We can add the deployment stage as Deploy QA. Then where is the Artifacts stage.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/57404c66-edba-42c9-9713-117446dc5a8c)
+
+To add the Artifact stage
+
+```
+Project - mydevops
+Source (build pipeline) - kohlidevops.DevopsBasics (2)
+Default version - Latest
+Source alias - _kohlidevops.DevopsBasics (2)
+// These things are auto populated once you select your project in Artifacts stage
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/d1f3ca45-7ebe-42fc-8433-81d78ddb4082)
+
+Finally save this project from accidental deletion.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/aa756175-a0e4-4b07-9e26-b6439d076457)
+
 
 **Create Release**
 
