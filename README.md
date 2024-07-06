@@ -337,13 +337,46 @@ Go to your Pipeline and edit and enable the Continuous Deployment. Thats it.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fa6635a4-3d92-47f8-aa5c-eaf6a3cba3d7)
 
-Now do some changes in the source code repository and lets check how build and release piplines are working together and how artifacts automatically deployed on to the Azure Web App Service.
+Now do some changes in the source code repository and lets check how build and release piplines are working together and how artifacts automatically deployed on to the Azure Web App Service which is going to act as a QA Envirnonment for testing.
 
 Build Pipeline has been completed and my Release-2 has been started.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/b1a50745-539a-4a6e-ad80-75ece0ac95c1)
 
-Yup! My updated source code has been deployed on the target machine.
+Yup! My updated source code has been deployed on the target machine that is QA Environment.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/0855fd66-519d-426f-bd96-bd19cd6c1bbd)
+
+I would like to test my QA Environment with selenium. For this, I have a code to test the app when artifacts deployed on Azure Web App. I can use below code for automation testing.
+
+```
+https://github.com/kohlidevops/Automation.git
+```
+
+Here I need to import this repo to Azure DevOps Repos. Its very simple.
+
+How to add the Automation testing repository to Azure DevOps Repos?
+
+Navigate to Azure DevOps panel and select the repos then import the below url.
+
+```
+https://github.com/kohlidevops/Automation.git
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/27f15a74-fe06-4282-abf3-580042606676)
+
+It has been imported successfully!
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/ad250798-7d09-45a9-b7dc-093548fc94b6)
+
+Once deployed, you have to changes this two lines highlighted. 
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/1f6df2ab-0be1-433d-bfcb-845577519447)
+
+```
+location - src/test/java/Academy/BrowserTest.java
+driver.get - should be - your Web App URL
+Assert.assertTrue(text.equalsIgnoreCase("Hi Latchu"));
+\\ It will check the your web page and will pass if this string equals
+```
 
