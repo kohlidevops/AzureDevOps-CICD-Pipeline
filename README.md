@@ -380,3 +380,66 @@ Assert.assertTrue(text.equalsIgnoreCase("Hi Latchu"));
 \\ It will check the your web page and will pass if this string equals
 ```
 
+**How to add the Test Automation Jobs to the Azure Release Pipeline?**
+
+To start a empty job after the QA Environment deployment
+
+Navigate to your Release Pipeline and edit the Pipeline - add the new stage after QA Environment stage.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/24171628-e2c8-4ca6-8346-8685a5064443)
+
+Add a empty job and name it as AutomationTest and save the Release Pipeline.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/5c80a970-6208-4275-9347-f13cc226fe0a)
+
+To add the AutomationTest repo in the Artifact stage
+
+After adding the AutomationTest repo into the Artifact stage, then only this Release Pipeline has access to the AutomationTest repo.
+
+```
+Add an Artifact
+Source type - Azure Repos
+Project - mydevops //because my project name is mydevops
+Source (repository) - mydevops
+Default branch - master
+Default version - Latest from the default branch
+Source alias - _mydevops
+Add
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/c714c301-5ad3-4811-b649-04df4af67041)
+
+Now, This AutomationTest Artifact has been added successfully.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/ee5a534b-9f09-4989-acec-f361daddfa4f)
+
+From the Release Pipeline, the AutomationTest stage can call this repo. Now you can add your tasks in the AutomationTest stage with the help of View stage tasks.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/5ce2e42d-dc9b-49a8-897c-d18f82299769)
+
+To click on the Agent Job with select '+' symbol and search Maven then add this.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/6bf2f694-551f-4ae8-85f7-24fd9865b172)
+
+Then click on the Maven pom.xml which you have been added now, 
+
+```
+Display name - Maven pom.xml
+Maven POM file - select your pom.xml //with the help of 3 dots and select your pom.xml of AutomationTest repo.
+Goals - test  //we have test the project and make the test results as xml file.
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/55d30146-74f7-49f2-910e-5f4121f6d051)
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/63c46e39-97ae-4312-a4b5-2814d99f0016)
+
+Lets save this stage. Now do some changes in the project source code repository and ensure all the stages are running automatically that is build the artifacts, artifacts deplyoed on the QA Environment and Regression AutomationTest has been invoked on the QA Environment.
+
+Everything working fine - Arifacts deployed on the QA Evironment, then Regression testing has been started.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/20cd5a35-f58b-468e-937c-ee2f6ba30cd3)
+
+
+
+
+
