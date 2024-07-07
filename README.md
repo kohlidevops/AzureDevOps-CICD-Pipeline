@@ -448,6 +448,85 @@ Perfect! Regression Test has been completed.
 
 ![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/a2b3da9d-d73c-488c-afc4-27371174bafe)
 
+Time to push this artifact to Producion Environment.
 
+**How to deploy the Artifact to the Production Environment?**
 
+Lets create one more Azure Web App and we can treat as Production Environment. Navigate to portal.azure.com and create one more Web App.
+
+```
+Subscription - Azure Subscription 1
+Resource Group - demo
+Name - latchudevopsprod
+Publish - code
+Runtime stack - Java 8
+Java web server stack - Apache Tomcat 9.0
+Operating System - Linux
+Region - Central US
+```
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/b7f7ce28-bf80-44ad-89af-1c0fbee77475)
+
+The deployment has been completed.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/3ac2e8b8-e09b-48eb-b8a3-d1a140c838b9)
+
+**To add the Production Web App Environment to the Release Pipeline stage**
+
+Go back to Release Pipeline and edit the stage.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/d5b2e054-00a2-4b5d-85cd-cd845bff094d)
+
+Add a Task - Stage in the RegressionAutomationTesting stage. Select Azure App Service deployment and Name it as ProductionDeployment.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/c23a9cff-7bfe-4a3d-8b63-f4783860756a)
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/c183bd70-de76-4ff7-87d1-d6d57d8458ce)
+
+The view the tasks in ProductionDeployment and add the parameters given below.
+
+```
+Azure subscription - subscription id
+App type - Web App on Linux
+App service name - latchudevopsprod
+Package or folder - $(System.DefaultWorkingDirectory)/**/*.war
+```
+
+Then select the agent and provide the war file location into the package and save it.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/cf514a8d-dc48-4ef0-88d8-09f7363e53e3)
+
+Now, How looks like our CICD pipeline?
+
+Let me update my Pipeline name as Azure CICD Pipeline
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/84e99777-7f4d-4e7a-9e9f-2224ca5d089c)
+
+1. When source code has been changed, the Build Pipeline will generate the Artifacts.
+2. Then Artifacts are deployed on QA Environment for testing.
+3. RegressionTesting will happen on the QA Environment using Azure Repos code.
+4. If test has been passed, then this Artifacts will deploy on the Production Environment.
+5. This is the way I have created CICD Pipeline for Azure App Service.
+
+As of now, My Production Environment URL has no application.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/fca6836b-c807-41fe-bd4c-0abe69ab00e3)
+
+Now I'm going to Create Release Pipeline and let see what happen
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/f627ce36-b21e-4aec-a119-195e0c03875f)
+
+As I manually triggered, its performing all the actions and now artifatcs are deploying on the Production Environment.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/df9059c2-0715-4212-a62a-989e2d4fc4fb)
+
+Finally, My Pipeline has been completed.
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/5d805723-66bb-4fad-96e4-f469335841bd)
+
+If I hit my Production Environment URL, then
+
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/9b426052-c367-46ca-aa08-ba62a292bfad)
+
+If I'm going to update my source code, then I ensure whether it is automatically deployed when changes occur in the source code repository.
 
