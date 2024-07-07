@@ -530,3 +530,6 @@ If I hit my Production Environment URL, then
 
 If I'm going to update my source code, then I ensure whether it is automatically deployed when changes occur in the source code repository.
 
+![image](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/ccefbd1c-d8b1-4a4e-954d-7f452985b6b0)
+
+That's it. I have successfully deployed the Artifacts on the ProductionEnvironment using Azure CICD Pipeline.
