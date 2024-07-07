@@ -1,4 +1,6 @@
-# AzureDevOps-CICD-Pipeline
+# To Deploy the Java Application on Azure Web App Service using Azure CICD Build and Release Pipleine
+
+![AzureCICDPipeline](https://github.com/kohlidevops/AzureDevOps-CICD-Pipeline/assets/100069489/4f2d6cf3-7dcf-4895-84bc-e9dc1c13d31e)
 
 **Azure Pipelines - Types of Pipelines**
 
